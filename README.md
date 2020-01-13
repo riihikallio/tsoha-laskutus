@@ -1,2 +1,2 @@
 # tsoha
-Tänne tulee ietokantasovellusharjoitus, jahka se etenee
+Tänne tulee tietokantasovellusharjoitus, jahka se etenee
