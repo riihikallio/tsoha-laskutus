@@ -131,4 +131,4 @@ dmypy.json
 # Local:
 .graffle
 .vscode/
-laskut.db
+invoice.db
