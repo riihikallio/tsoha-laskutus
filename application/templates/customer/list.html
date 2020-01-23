@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<script>
+  var tab="cust"
+</script>
 <ul>
   {% for customer in customers %}
 <li>
@@ -10,7 +13,7 @@
 </li>
 {% endfor %}
 </ul>
-<a href="{{ url_for('customer_form') }}">
-  Create new..
+<a class="btn btn-primary" role="button" href="{{ url_for('customer_form') }}">
+  Add
 </a>
 {% endblock %}

@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<script>
+  var tab="cust"
+</script>
   {% if customer.number != 0 %}
     <form method="POST" action="{{ url_for('customer_save', number=customer.number) }}">
   {% else %}
@@ -12,7 +15,7 @@
         <td><input type="text" name="name" value="{{ customer.name }}" /></td>
       </tr>
       <tr>
-        <td>Address:</td>
+        <td valign="top">Address:</td>
         <td>
           <textarea name="address" cols="40" rows="5">{{ customer.address }}</textarea>
         </td>
@@ -20,13 +23,13 @@
       <tr>
         <td>
         {% if customer.number != 0 %}
-        <a href="{{ url_for('customer_delete', number=customer.number) }}">
+        <a class="btn btn-danger" role="button" href="{{ url_for('customer_delete', number=customer.number) }}">
           DELETE
         </a>
         {% endif %}
         </td>
         <td align="right">
-          <input type="submit" value="Save" />
+          <input class="btn btn-primary" type="submit" value="Save" />
         </td>
       </tr>
     </table>
