@@ -128,7 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Local:
+# Local
 .graffle
 .vscode/
 invoice.db
