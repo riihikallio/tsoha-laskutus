@@ -5,7 +5,7 @@
   var tab="cust"
 </script>
 <ul>
-  {% for customer in customers %}
+{% for customer in customers %}
 <li>
   <a href="{{ url_for('customer_edit', number=customer.number) }}">
     {{ customer.name }}
