@@ -2,10 +2,10 @@
 
 Roolissa | Haluan | Jotta
 --- | --- | ---
-Käyttäjä | Nähdä asiakkaat |
-Käyttäjä | Lisätä asiakkaan |
-Käyttäjä | Muokata asiakasta |
-Käyttäjä | Poistaa asiakkaan |
+Käyttäjä | ~~Nähdä asiakkaat~~ |
+Käyttäjä | ~~Lisätä asiakkaan~~ |
+Käyttäjä | ~~Muokata asiakasta~~ |
+Käyttäjä | ~~Poistaa asiakkaan~~ |
 Ylläpitäjä | Rajoittaa käyttäjät omiin asiakkaisiinsa | Sopu säilyy myyjien kesken
 Käyttäjä | Nähdä tuotteet |
 Käyttäjä | Lisätä tuotteen |
