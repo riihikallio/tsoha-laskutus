@@ -20,7 +20,7 @@ def customer_edit(number):
 @app.route("/customers/<int:number>/", methods=["POST"])
 def customer_save(number):
     c = Customer.query.get(number)
-    if bool(c) and request.form.get("name"):
+    if bool(c) and bool(request.form.get("name")):
         c.name = request.form.get("name")
         c.address = request.form.get("address")
         db.session().commit()
