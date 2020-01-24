@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 
 # Local
-.graffle
 .vscode/
 invoice.db
+ERD.graffle
