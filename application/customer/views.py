@@ -20,7 +20,7 @@ def customer_edit(number):
 @app.route("/customers/<int:number>/", methods=["POST"])
 def customer_save(number):
     c = Customer.query.get(number)
-    if bool(c):
+    if bool(c) and request.form.get("name"):
         c.name = request.form.get("name")
         c.address = request.form.get("address")
         db.session().commit()
@@ -37,8 +37,9 @@ def customer_form():
 @app.route("/customers/", methods=["POST"])
 def customer_create():
     c = Customer(request.form.get("name"), request.form.get("address"))
-    db.session().add(c)
-    db.session().commit()
+    if bool(c.name):
+        db.session().add(c)
+        db.session().commit()
     return redirect(url_for("customers_index"))
 
 
