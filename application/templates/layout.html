@@ -12,7 +12,7 @@
 <body>
   <div class="container">
     <nav class="navbar navbar-default">
-      <ul class="nav nav-pills">
+      <ul class="nav nav-tabs">
         <li class="nav-item">
           <a id="inv" class="nav-link active" href="/invoices/">Invoices</a>
         </li>
@@ -24,12 +24,14 @@
         </li>
       </ul>
     </nav>
+
     {% block body %}
     <p>
       Content.
     </p>
     {% endblock %}
   </div>
+  
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>

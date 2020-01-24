@@ -2,13 +2,13 @@
 
 {% block body %}
 <script>
-  var tab="cust"
+  var tab = "cust"
 </script>
-  {% if customer.number != 0 %}
-    <form method="POST" action="{{ url_for('customer_save', number=customer.number) }}">
+{% if customer.number != 0 %}
+<form method="POST" action="{{ url_for('customer_save', number=customer.number) }}">
   {% else %}
-    <form method="POST" action="{{ url_for('customer_create') }}">
-  {% endif %}
+  <form method="POST" action="{{ url_for('customer_create') }}">
+    {% endif %}
     <table>
       <tr>
         <td>Name:</td>
@@ -22,16 +22,18 @@
       </tr>
       <tr>
         <td>
-        {% if customer.number != 0 %}
-        <a class="btn btn-danger" role="button" href="{{ url_for('customer_delete', number=customer.number) }}">
-          DELETE
-        </a>
-        {% endif %}
+          {% if customer.number != 0 %}
+          <a class="btn btn-outline-danger" role="button"
+            href="{{ url_for('customer_delete', number=customer.number) }}">
+            Delete
+          </a>
+          {% endif %}
         </td>
         <td align="right">
-          <input class="btn btn-primary" type="submit" value="Save" />
+          <input class="btn btn-outline-primary" type="submit" value="Save" />
+          <input class="btn btn-outline-secondary" type="button" value="Cancel" onClick="window.history.back()" />
         </td>
       </tr>
     </table>
   </form>
-{% endblock %}
+  {% endblock %}
