@@ -20,4 +20,6 @@ Käyttäjä | Nähdä laskun rivit |
 Käyttäjä | Lisätä laskuun rivejä |
 Käyttäjä | Muokata laskun rivejä |
 Käyttäjä | Poistaa laskun rivin |
-Esimies | Nähdä myyjien myyntiraportit | 
+Esimies | Nähdä tuoteryhmien myyntiraportin |
+Esimies | Nähdä myyjien myyntiraportin |
+Esimies | Nähdä asiakkaiden myyntiraportin |
