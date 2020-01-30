@@ -24,6 +24,8 @@ def customer_edit(number):
 @app.route("/customers/<int:number>/", methods=["POST"])
 def customer_save(number):
     f = CustomerForm(request.form)
+    if not f.validate():
+        return render_template("customer/edit.html", form = f, num=number)
     c = Customer.query.get(number)
     if bool(c) and bool(f.name.data):
         c.name = f.name.data
@@ -40,6 +42,8 @@ def customer_form():
 @app.route("/customers/", methods=["POST"])
 def customer_create():
     f = CustomerForm(request.form)
+    if not f.validate():
+        return render_template("customer/edit.html", form = f, num=0)
     c = Customer(f.name.data, f.address.data)
     if bool(c.name):
         db.session().add(c)
