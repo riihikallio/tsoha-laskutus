@@ -4,27 +4,27 @@
 <script>
   var tab = "cust"
 </script>
-{% if customer.number != 0 %}
-<form method="POST" action="{{ url_for('customer_save', number=customer.number) }}">
-  {% else %}
+{% if num != 0 %}
+  <form method="POST" action="{{ url_for('customer_save', number=num) }}">
+{% else %}
   <form method="POST" action="{{ url_for('customer_create') }}">
-    {% endif %}
+{% endif %}
     <table>
       <tr>
-        <td>Name:</td>
-        <td><input type="text" name="name" value="{{ customer.name }}" /></td>
+        <td>{{ form.name.label }}</td>
+        <td>{{ form.name }}</td>
       </tr>
       <tr>
-        <td valign="top">Address:</td>
+        <td valign="top">{{ form.address.label }}</td>
         <td>
-          <textarea name="address" cols="40" rows="5">{{ customer.address }}</textarea>
+          {{ form.address }}
         </td>
       </tr>
       <tr>
         <td>
-          {% if customer.number != 0 %}
+          {% if num != 0 %}
           <a class="btn btn-outline-danger" role="button"
-            href="{{ url_for('customer_delete', number=customer.number) }}">
+            href="{{ url_for('customer_delete', number=num) }}">
             Delete
           </a>
           {% endif %}
@@ -36,4 +36,4 @@
       </tr>
     </table>
   </form>
-  {% endblock %}
+{% endblock %}

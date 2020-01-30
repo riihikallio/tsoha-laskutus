@@ -1,6 +1,7 @@
 from application import app, db
 from flask import redirect, render_template, request, url_for
 from application.customer.models import Customer
+from application.customer.forms import CustomerForm
 
 
 @app.route("/customers/", methods=["GET"])
@@ -11,32 +12,35 @@ def customers_index():
 @app.route("/customers/<int:number>/", methods=["GET"])
 def customer_edit(number):
     c = Customer.query.get(number)
+    f = CustomerForm()
+    f.name.data = c.name
+    f.address.data = c.address
     if bool(c):
-        return render_template("customer/edit.html", customer=c)
+        return render_template("customer/edit.html", form=f, num=c.number)
     else:
         return redirect(url_for("customers_index"))
 
 
 @app.route("/customers/<int:number>/", methods=["POST"])
 def customer_save(number):
+    f = CustomerForm(request.form)
     c = Customer.query.get(number)
-    if bool(c) and bool(request.form.get("name")):
-        c.name = request.form.get("name")
-        c.address = request.form.get("address")
+    if bool(c) and bool(f.name.data):
+        c.name = f.name.data
+        c.address = f.address.data
         db.session().commit()
     return redirect(url_for("customers_index"))
 
 
 @app.route("/customers/new/", methods=["GET"])
 def customer_form():
-    empty = Customer("", "")
-    empty.number = 0
-    return render_template("customer/edit.html", customer=empty)
+    return render_template("customer/edit.html", form=CustomerForm(), num=0)
 
 
 @app.route("/customers/", methods=["POST"])
 def customer_create():
-    c = Customer(request.form.get("name"), request.form.get("address"))
+    f = CustomerForm(request.form)
+    c = Customer(f.name.data, f.address.data)
     if bool(c.name):
         db.session().add(c)
         db.session().commit()
