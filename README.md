@@ -10,4 +10,4 @@ Jokaisella käyttäjällä on omat asiakkaansa eivätkä käyttäjät näe toist
 
 Käyttäjät voivat katsoa, lisätä, poistaa ja muokata tuotteita, omia laskujaan ja omia asiakkaitaan. Katso lisää: <https://github.com/riihikallio/tsoha/blob/master/documentation/user_stories.md>
 
-![ER-kaavio](https://github.com/riihikallio/tsoha/blob/master/documentation/erd.png)
+![Kaavio](https://github.com/riihikallio/tsoha/blob/master/documentation/kaavio.png)
