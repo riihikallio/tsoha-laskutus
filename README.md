@@ -6,7 +6,7 @@ Yksinkertainen laskutussovellus kappaletavarakauppaan. Sovelluksessa on tuoterek
 
 Tuoterekisterissä on tuoteryhmä-kenttä yhteenvetoraportointia varten. Esimerkiksi asiakaskohtainen raportointi tuoteryhmittäin edellyttää useamman taulun yhteiskäyttöä ja summaamista.
 
-Jokaisella käyttäjällä on omat asiakkaansa eivätkä käyttäjät näe toistensa asiakkaita.
+Jokaisella käyttäjällä on omat asiakkaansa eivätkä käyttäjät näe toistensa asiakkaita. Sama koskee laskuja.
 
 Käyttäjät voivat katsoa, lisätä, poistaa ja muokata tuotteita, omia laskujaan ja omia asiakkaitaan. Katso lisää: <https://github.com/riihikallio/tsoha/blob/master/documentation/user_stories.md>
 
