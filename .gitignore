@@ -131,4 +131,4 @@ dmypy.json
 # Local
 .vscode/
 invoice.db
-ERD.graffle
+.graffle
