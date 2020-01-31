@@ -39,11 +39,11 @@ def load_user(user_id):
     
 try: 
     db.create_all()
-    u = User("Erkki", "erkki", "sala")
-    db.session().add(u)
-    db.session().commit()
-    u = User("Paavo", "paavo", "sala")
-    db.session().add(u)
-    db.session().commit()
+    # u = User("Erkki", "erkki", "sala")
+    # db.session().add(u)
+    # db.session().commit()
+    # u = User("Paavo", "paavo", "sala")
+    # db.session().add(u)
+    # db.session().commit()
 except:
     pass
