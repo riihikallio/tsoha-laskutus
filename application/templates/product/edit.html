@@ -9,18 +9,11 @@
   {% else %}
   <form method="POST" action="{{ url_for('product_create') }}">
     {% endif %}
-    <div>
-      <ul>
-        {% for error in form.name.errors %}
-        <li>{{ error }}</li>
-        {% endfor %}
-      </ul>
-    </div>
     <table>
       <tr>
-        <td>{{ form.name.label }}</td>
-        <td>{{ form.name }}</td>
-        <td>
+        <td style="vertical-align:baseline">{{ form.name.label }}</td>
+        <td style="vertical-align:baseline">{{ form.name }}</td>
+        <td style="vertical-align:baseline">
           <ul>
             {% for error in form.name.errors %}
             <li>{{ error }}</li>
@@ -29,9 +22,9 @@
         </td>
       </tr>
       <tr>
-        <td>{{ form.unit.label }}</td>
-        <td>{{ form.unit }}</td>
-        <td>
+        <td style="vertical-align:baseline">{{ form.unit.label }}</td>
+        <td style="vertical-align:baseline">{{ form.unit }}</td>
+        <td style="vertical-align:baseline">
           <ul>
             {% for error in form.unit.errors %}
             <li>{{ error }}</li>
@@ -40,9 +33,9 @@
         </td>
       </tr>
       <tr>
-        <td>{{ form.price.label }}</td>
-        <td>{{ form.price }}</td>
-        <td>
+        <td style="vertical-align:baseline">{{ form.price.label }}</td>
+        <td style="vertical-align:baseline">{{ form.price }}</td>
+        <td style="vertical-align:baseline">
           <ul>
             {% for error in form.price.errors %}
             <li>{{ error }}</li>
@@ -51,9 +44,9 @@
         </td>
       </tr>
       <tr>
-        <td>{{ form.category.label }}</td>
-        <td>{{ form.category }}</td>
-        <td>
+        <td style="vertical-align:baseline">{{ form.category.label }}</td>
+        <td style="vertical-align:baseline">{{ form.category }}</td>
+        <td style="vertical-align:baseline">
           <ul>
             {% for error in form.category.errors %}
             <li>{{ error }}</li>

@@ -11,9 +11,9 @@
 {% endif %}
     <table>
       <tr>
-        <td>{{ form.name.label }}</td>
-        <td>{{ form.name }}</td>
-        <td>
+        <td style="vertical-align:baseline">{{ form.name.label }}</td>
+        <td style="vertical-align:baseline">{{ form.name }}</td>
+        <td style="vertical-align:baseline">
 	        <ul>
 	        {% for error in form.name.errors %}
 	          <li>{{ error }}</li>

@@ -5,13 +5,13 @@
 <form method="POST" action="{{ url_for(action) }}">
   <table>
     <tr>
-      <td>
-	      {{ form.username.label }}
+      <td style="vertical-align:baseline">
+        {{ form.username.label }}
       </td>
-      <td>
-	      {{ form.username }}
+      <td style="vertical-align:baseline">
+        {{ form.username }}
       </td>
-      <td>
+      <td style="vertical-align:baseline">
         <ul>
           {% for error in form.username.errors %}
           <li>{{ error }}</li>
@@ -20,16 +20,16 @@
       </td>
     </tr>
     <tr>
-      <td>
-	      {{ form.password.label }}
+      <td style="vertical-align:baseline">
+        {{ form.password.label }}
       </td>
-      <td>
-	      {{ form.password }}
+      <td style="vertical-align:baseline">
+        {{ form.password }}
       </td>
     </tr>
     <tr>
-      <td colspan="2" align="right">
-        <input class="btn btn-outline-primary" type="submit" value="{{ button }}"/>
+      <td style="vertical-align:baseline" colspan="2" align="right">
+        <input class="btn btn-outline-primary" type="submit" value="{{ button }}" />
         <a class="btn btn-outline-secondary" type="button" href="{{ url_for('products_index') }}">Cancel</a>
       </td>
     </tr>
