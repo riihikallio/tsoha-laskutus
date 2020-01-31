@@ -2,28 +2,35 @@
 
 {% block body %}
 <div class="text-danger"></div>{{ error }}</div>
-<form method="POST" action="{{ url_for('auth_login') }}">
+<form method="POST" action="{{ url_for(action) }}">
   <table>
     <tr>
       <td>
-	{{ form.username.label }}
+	      {{ form.username.label }}
       </td>
       <td>
-	{{ form.username }}
+	      {{ form.username }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.username.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
       </td>
     </tr>
     <tr>
       <td>
-	{{ form.password.label }}
+	      {{ form.password.label }}
       </td>
       <td>
-	{{ form.password }}
+	      {{ form.password }}
       </td>
     </tr>
     <tr>
       <td colspan="2" align="right">
-        <input class="btn btn-outline-primary" type="submit" value="Login"/>
-        <input class="btn btn-outline-secondary" type="button" value="Cancel" onClick="window.history.back()" />
+        <input class="btn btn-outline-primary" type="submit" value="{{ button }}"/>
+        <a class="btn btn-outline-secondary" type="button" href="{{ url_for('products_index') }}">Cancel</a>
       </td>
     </tr>
 </form>
