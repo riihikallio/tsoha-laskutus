@@ -38,4 +38,4 @@ def auth_create():
         db.session().add(u)
         db.session().commit()
         login_user(u)
-    return redirect(url_for("products_index"))
+    return redirect(url_for("index"))
