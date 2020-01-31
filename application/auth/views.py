@@ -37,4 +37,5 @@ def auth_create():
     if bool(u.name):
         db.session().add(u)
         db.session().commit()
+        login_user(u)
     return redirect(url_for("products_index"))
