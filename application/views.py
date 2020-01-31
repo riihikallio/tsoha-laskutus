@@ -3,4 +3,4 @@ from application import app
 
 @app.route("/")
 def index():
-    return redirect(url_for("customers_index"))
+    return redirect(url_for("products_index"))

@@ -4,7 +4,26 @@
 <script>
   var tab="prod"
 </script>
-
-<p>Vain asiakashallinta on toteutettu</p>
-
+<table>
+{% for product in products %}
+<tr>
+<td class="px-3">{{ product.name }}</td>
+<td class="px-3">{{ product.unit }}</td>
+<td class="px-3" align="right">{{ product.price }}</td>
+<td class="px-3">
+  {% if current_user.is_authenticated %}
+  <a  class="btn btn-outline-primary" role="button" href="{{ url_for('product_edit', number=product.number) }}">
+    Edit
+  </a>
+  {% endif %}
+</td>
+</tr>
+{% endfor %}
+</table>
+{% if current_user.is_authenticated %}
+<a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('product_form') }}">
+  Add
+</a>
+{% endif %}
 {% endblock %}
+

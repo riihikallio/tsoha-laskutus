@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<script>
+  var tab = "prod"
+</script>
+{% if num != 0 %}
+<form method="POST" action="{{ url_for('product_save', number=num) }}">
+  {% else %}
+  <form method="POST" action="{{ url_for('product_create') }}">
+    {% endif %}
+    <div>
+      <ul>
+        {% for error in form.name.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <table>
+      <tr>
+        <td>{{ form.name.label }}</td>
+        <td>{{ form.name }}</td>
+        <td>
+          <ul>
+            {% for error in form.name.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>{{ form.unit.label }}</td>
+        <td>{{ form.unit }}</td>
+        <td>
+          <ul>
+            {% for error in form.unit.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>{{ form.price.label }}</td>
+        <td>{{ form.price }}</td>
+        <td>
+          <ul>
+            {% for error in form.price.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          {% if num != 0 %}
+          <a class="btn btn-outline-danger" role="button" href="{{ url_for('product_delete', number=num) }}">
+            Delete
+          </a>
+          {% endif %}
+        </td>
+        <td align="right">
+          <input class="btn btn-outline-primary" type="submit" value="Save" />
+          <a class="btn btn-outline-secondary" type="button" href="{{ url_for('products_index') }}">Cancel</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+  {% endblock %}
