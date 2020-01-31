@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="text-danger"></div>{{ error }}</div>
+<form method="POST" action="{{ url_for('auth_login') }}">
+  <table>
+    <tr>
+      <td>
+	{{ form.username.label }}
+      </td>
+      <td>
+	{{ form.username }}
+      </td>
+    </tr>
+    <tr>
+      <td>
+	{{ form.password.label }}
+      </td>
+      <td>
+	{{ form.password }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="right">
+        <input class="btn btn-outline-primary" type="submit" value="Login"/>
+        <input class="btn btn-outline-secondary" type="button" value="Cancel" onClick="window.history.back()" />
+      </td>
+    </tr>
+</form>
+{% endblock %}
