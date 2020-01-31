@@ -18,6 +18,7 @@ def product_edit(number):
     f.name.data = p.name
     f.unit.data = p.unit
     f.price.data = p.price
+    f.category.data = p.category
     if bool(p):
         return render_template("product/edit.html", form=f, num=p.number)
     else:
@@ -35,6 +36,7 @@ def product_save(number):
         p.name = f.name.data
         p.unit = f.unit.data
         p.price = f.price.data
+        p.category = f.category.data
         db.session().commit()
     return redirect(url_for("products_index"))
 
@@ -51,7 +53,7 @@ def product_create():
     f = ProductForm(request.form)
     if not f.validate():
         return render_template("product/edit.html", form = f, num=0)
-    p = Product(f.name.data, f.unit.data, f.price.data)
+    p = Product(f.name.data, f.unit.data, f.price.data, f.category.data)
     if bool(p.name):
         db.session().add(p)
         db.session().commit()
