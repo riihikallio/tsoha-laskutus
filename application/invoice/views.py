@@ -25,6 +25,7 @@ def invoice_show(number):
     else:
         return redirect(url_for("invoices_index"))
 
+
 @app.route("/invoices/<int:number>/edit/", methods=["GET"])
 @login_required
 def invoice_edit(number):
@@ -60,7 +61,9 @@ def invoice_save(number):
 @app.route("/invoices/new/", methods=["GET"])
 @login_required
 def invoice_form():
-    return render_template("invoice/edit.html", form=InvoiceForm(), num=0)
+    f = InvoiceForm()
+    f.rows.append_entry()
+    return render_template("invoice/edit.html", form=f, num=0)
 
 
 @app.route("/invoices/", methods=["POST"])
@@ -68,8 +71,10 @@ def invoice_form():
 def invoice_create():
     f = InvoiceForm(request.form)
     if not f.validate():
-        return render_template("invoice/edit.html", form = f, num=0)
-    i = Invoice(f.name.data, f.unit.data, f.price.data, f.category.data)
+        return render_template("invoice/edit.html", form=f, num=0)
+    print(f.customer.data)
+    print(f.rows.data)
+    i = Invoice(f.customer.data, f.rows.data)
     if bool(i.name):
         db.session().add(i)
         db.session().commit()
@@ -84,3 +89,17 @@ def invoice_delete(number):
         db.session().delete(i)
         db.session().commit()
     return redirect(url_for("invoices_index"))
+
+
+@app.route("/invoices/<int:number>/rows/", methods=["POST"])
+@login_required
+def rows_add():
+    f = InvoiceForm(request.form)
+    #f.rows.append(Rows())
+    return render_template("invoice/edit.html", form=f, num=number)
+
+@app.route("/invoices/<int:number>/rows/<int:row>/", methods=["POST"])
+@login_required
+def rows_del():
+    f = InvoiceForm(request.form)
+    return render_template("invoice/edit.html", form=f, num=number)

@@ -8,11 +8,11 @@
 <form method="POST" action="{{ url_for('invoice_save', number=num) }}">
   {% else %}
   <form method="POST" action="{{ url_for('invoice_create') }}">
-    {% endif %}
+{% endif %}
     <table>
       <tr>
         <td style="vertical-align:baseline">{{ form.customer.label }}</td>
-        <td style="vertical-align:baseline">{{ form.customer }}</td>
+        <td style="vertical-align:baseline">{{ form.customer(class_='form-control') }}</td>
         <td style="vertical-align:baseline">
           <ul>
             {% for error in form.customer.errors %}
@@ -21,6 +21,24 @@
           </ul>
         </td>
       </tr>
+    </table>
+    <div data-toggle="fieldset" id="rows-fieldset" class="form-group">
+      <table class="ui table" width="10%">
+        <thead>
+          <th>Product</th>
+          <th width="10%">Quantity</th>
+        </thead>
+        <tbody>
+          {% for r in form.rows %}
+          <tr data-toggle="fieldset-entry">
+            <td>{{ r.product(class_='form-control') }}</td>
+            <td>{{ r.count(class_='form-control') }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <table width="100%">
       <tr>
         <td>
           {% if num != 0 %}

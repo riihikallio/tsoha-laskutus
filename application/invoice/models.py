@@ -7,17 +7,19 @@ class Invoice(db.Model):
     onupdate=db.func.current_timestamp())
 
     customer_num = db.Column(db.Integer, db.ForeignKey('customer.number'), nullable=False)
+    customer = db.relationship("Customer")
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
 
     rows = db.relationship("Row", backref="invoice")
 
-    def __init__(self, customer_num, account_id):
-        self.customer_num = customer_num
-        self.account_id = account_id
+    def __init__(self, customer, rows):
+        self.customer = customer
+        self.rows = rows
+        self.account_id = current_user.id
 
 
 class Row(db.Model):
-    number = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
     onupdate=db.func.current_timestamp())
@@ -28,7 +30,7 @@ class Row(db.Model):
 
     invoice_num = db.Column(db.Integer, db.ForeignKey('invoice.number'), nullable=False)
 
-    def __init__(self, product_num, count):
-        self.product_num = product_num
+    def __init__(self, product, count):
+        self.product = product
         self.count = count
 
