@@ -4,7 +4,22 @@
 <script>
   var tab="inv"
 </script>
-
-<p>Toteuttamatta vielä</p>
-
+<table>
+{% for invoice in invoices %}
+<tr>
+<td class="px-3">{{ invoice.number }}</td>
+<td class="px-3">{{ invoice.date_modified }}</td>
+<td class="px-3">{{ invoice.customer.name }}</td>
+<td class="px-3">
+  <a  class="btn btn-outline-primary" role="button" href="{{ url_for('invoice_show', number=invoice.number) }}">
+    Open
+  </a>
+</td>
+</tr>
+{% endfor %}
+</table>
+<a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('invoice_form') }}">
+  Add
+</a>
 {% endblock %}
+
