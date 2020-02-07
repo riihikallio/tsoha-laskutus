@@ -8,7 +8,7 @@ Ilman kirjautumista voi katsoa vain tuotehinnastoa. Käyttäjätunnukset *erkki*
 
 Tuoterekisterissä on tuoteryhmä-kenttä yhteenvetoraportointia varten. Esimerkiksi asiakaskohtainen raportointi tuoteryhmittäin edellyttää useamman taulun yhteiskäyttöä ja summaamista.
 
-Jokaisella käyttäjällä tulee olemaan omat asiakkaansa eivätkä käyttäjät näe toistensa asiakkaita. Sama koskee laskuja.
+Jokaisella käyttäjällä on omat laskunsa eivätkä käyttäjät näe toistensa laskuja.
 
 Käyttäjät voivat katsoa, lisätä, poistaa ja muokata tuotteita, omia laskujaan ja omia asiakkaitaan. Katso lisää: <https://github.com/riihikallio/tsoha/blob/master/documentation/user_stories.md>
 
