@@ -13,7 +13,7 @@ def auth_login():
     form = LoginForm(request.form)
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
     if not user:
-        return render_template("auth/loginform.html", form = form,
+        return render_template("auth/loginform.html", form = form, action="auth_login", button="Login",
                                error = "No such username or password")
 
     login_user(user)
