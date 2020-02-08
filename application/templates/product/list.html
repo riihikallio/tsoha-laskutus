@@ -2,23 +2,31 @@
 
 {% block body %}
 <script>
-  var tab="prod"
+  var tab = "prod"
 </script>
 <table>
-{% for product in products %}
-<tr>
-<td class="px-3">{{ product.name }}</td>
-<td class="px-3">{{ product.unit }}</td>
-<td class="px-3" align="right">{{ product.price }}</td>
-<td class="px-3">
-  {% if current_user.is_authenticated %}
-  <a  class="btn btn-outline-primary" role="button" href="{{ url_for('product_edit', number=product.number) }}">
-    Edit
-  </a>
-  {% endif %}
-</td>
-</tr>
-{% endfor %}
+  <thead>
+    <th style="text-align:center">Product</th>
+    <th style="text-align:center">Unit</th>
+    <th style="text-align:center">Price</th>
+    <th></th>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td class="px-3">{{ product.name }}</td>
+      <td class="px-3">{{ product.unit }}</td>
+      <td class="px-3" align="right">{{ product.price }}</td>
+      <td class="px-3">
+        {% if current_user.is_authenticated %}
+        <a class="btn btn-outline-primary" role="button" href="{{ url_for('product_edit', number=product.number) }}">
+          Edit
+        </a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 {% if current_user.is_authenticated %}
 <a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('product_form') }}">
@@ -26,4 +34,3 @@
 </a>
 {% endif %}
 {% endblock %}
-
