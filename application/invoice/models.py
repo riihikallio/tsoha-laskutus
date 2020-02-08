@@ -1,3 +1,4 @@
+from flask_login import current_user
 from application import db
 
 class Invoice(db.Model):
