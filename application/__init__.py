@@ -38,7 +38,11 @@ login_manager.login_message = "Please login to use this functionality."
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
-    
+
+@app.template_filter('datetime')
+def datetimeformat(value, format='%d.%m.%Y'):
+    return value.strftime(format)
+
 try: 
     db.create_all()
     # u = User("Erkki", "erkki", "sala")
