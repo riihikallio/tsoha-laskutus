@@ -43,6 +43,10 @@ def load_user(user_id):
 def datetimeformat(value, format='%d.%m.%Y'):
     return value.strftime(format)
 
+@app.template_filter('decimal')
+def decimalformat(value, format='{:.2f}'):
+    return format.format(value)
+
 try: 
     db.create_all()
     # u = User("Erkki", "erkki", "sala")

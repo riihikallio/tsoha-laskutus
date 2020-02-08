@@ -16,7 +16,7 @@
     <tr>
       <td class="px-3">{{ product.name }}</td>
       <td class="px-3">{{ product.unit }}</td>
-      <td class="px-3" align="right">{{ product.price }}</td>
+      <td class="px-3" align="right">{{ product.price|decimal }}</td>
       <td class="px-3">
         {% if current_user.is_authenticated %}
         <a class="btn btn-outline-primary" role="button" href="{{ url_for('product_edit', number=product.number) }}">
