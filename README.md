@@ -6,6 +6,8 @@ Yksinkertainen laskutussovellus kappaletavarakauppaan. Sovelluksessa on tuoterek
 
 Ilman kirjautumista voi katsoa vain tuotehinnastoa. Käyttäjätunnukset *erkki* ja *paavo* toimivat ja niiden salasana on *sala*
 
+Ennen laskujen luomista pitää luoda vähintään yksi asiakas ja yksi tuote.
+
 Tuoterekisterissä on tuoteryhmä-kenttä yhteenvetoraportointia varten. Esimerkiksi asiakaskohtainen raportointi tuoteryhmittäin edellyttää useamman taulun yhteiskäyttöä ja summaamista.
 
 Jokaisella käyttäjällä on omat laskunsa eivätkä käyttäjät näe toistensa laskuja.
