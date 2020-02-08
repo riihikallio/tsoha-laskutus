@@ -95,17 +95,3 @@ def invoice_delete(number):
         db.session().delete(i)
         db.session().commit()
     return redirect(url_for("invoices_index"))
-
-
-@app.route("/invoices/<int:number>/rows/", methods=["POST"])
-@login_required
-def rows_add():
-    f = InvoiceForm(request.form)
-    #f.rows.append(Rows())
-    return render_template("invoice/edit.html", form=f, num=number)
-
-@app.route("/invoices/<int:number>/rows/<int:row>/", methods=["POST"])
-@login_required
-def rows_del():
-    f = InvoiceForm(request.form)
-    return render_template("invoice/edit.html", form=f, num=number)
