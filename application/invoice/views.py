@@ -81,7 +81,7 @@ def invoice_create():
 #    if not f.validate():
 #        return render_template("invoice/edit.html", form=f, num=0)
     i = Invoice(f.customer.data, rows)
-    if bool(i.customer.name):
+    if bool(i) and bool(i.customer) and bool(i.customer.name):
         db.session().add(i)
         db.session().commit()
     return redirect(url_for("invoices_index"))

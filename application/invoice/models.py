@@ -11,7 +11,7 @@ class Invoice(db.Model):
     customer = db.relationship("Customer")
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
 
-    rows = db.relationship("Row", backref="invoice")
+    rows = db.relationship("Row", backref="invoice", cascade="delete")
 
     def __init__(self, customer, rows):
         self.customer = customer
