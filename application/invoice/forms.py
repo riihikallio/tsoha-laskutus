@@ -16,7 +16,7 @@ def get_products():
 class RowForm(ModelForm):
     product = QuerySelectField('Product',[validators.InputRequired(u'Please select a product')], 
                 query_factory=get_products, get_label='name', allow_blank=True)
-    count = FloatField("Count", [validators.NumberRange(min=1)])
+    count = FloatField("Count", [validators.NumberRange(min=0)])
 
     class Meta:
         csrf = False
