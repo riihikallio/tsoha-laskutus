@@ -14,7 +14,7 @@ def invoices_init():
     cust = Customer.query.first()
     prod = Product.query.first()
     row = Row(prod, 1)
-    inv = Invoice(cust, [ row ])
+    inv = Invoice(cust, [row])
     print("########## SAVE ###########")
     db.session().add(row)
     db.session().add(inv)
@@ -37,16 +37,16 @@ def invoices_index():
     return render_template("invoice/list.html", invoices=current_user.invoices)
 
 # OK
-@app.route("/invoices/<int:number>/", methods=["GET"])
+@app.route("/invoices/edit/<int:number>/", methods=["GET"])
 @login_required
-def invoice_show(number):
+def invoice_edit(number):
     if not check_access(number):
         return redirect(url_for("invoices_index"))
     inv = Invoice.query.get(number)
     form = InvoiceForm()
     form.customer.data = inv.customer
     for row in inv.rows:
-        form.rows.append_entry({"product":row.product, "count":row.count})
+        form.rows.append_entry({"product": row.product, "count": row.count})
     form.rows.append_entry()
     form.rows.append_entry()
     if bool(inv):
@@ -55,17 +55,14 @@ def invoice_show(number):
         return redirect(url_for("invoices_index"))
 
 
-@app.route("/invoices/<int:number>/edit/", methods=["GET"])
+@app.route("/invoices/<int:number>/", methods=["GET"])
 @login_required
-def invoice_edit(number):
+def invoice_show(number):
     if not check_access(number):
         return redirect(url_for("invoices_index"))
-    i = Invoice.query.get(number)
-    f = InvoiceForm()
-    f.customer.data = i.customer
-    f.rows.data = i.rows
-    if bool(i):
-        return render_template("invoice/edit.html", form=f, num=i.number)
+    inv = Invoice.query.get(number)
+    if bool(inv):
+        return render_template("invoice/show.html", inv=inv)
     else:
         return redirect(url_for("invoices_index"))
 
@@ -82,7 +79,7 @@ def invoice_save(number):
             count = float(formRow["count"])
         except ValueError:
             continue
-        if formRow["product"] and count>0:
+        if formRow["product"] and count > 0:
             rows.append(Row(formRow["product"], count))
     inv = Invoice(form.customer.data, rows)
     if bool(inv) and bool(inv.customer) and bool(inv.customer.name) and len(inv.rows) > 0:
@@ -96,7 +93,6 @@ def invoice_save(number):
     return redirect(url_for("invoices_index"))
 
 
-# OK
 @app.route("/invoices/new/", methods=["GET"])
 @login_required
 def invoice_form():
@@ -109,7 +105,6 @@ def invoice_form():
     return render_template("invoice/edit.html", form=form, num=0)
 
 
-# OK
 @app.route("/invoices/", methods=["POST"])
 @login_required
 def invoice_create():
@@ -122,7 +117,7 @@ def invoice_create():
             count = float(formRow["count"])
         except ValueError:
             continue
-        if formRow["product"] and count>=0:
+        if formRow["product"] and count >= 0:
             rows.append(Row(formRow["product"], count))
     inv = Invoice(form.customer.data, rows)
     if bool(inv) and bool(inv.customer) and bool(inv.customer.name) and len(inv.rows) > 0:
@@ -133,7 +128,6 @@ def invoice_create():
     return redirect(url_for("invoices_index"))
 
 
-# Toimii
 @app.route("/invoices/del/<int:number>/", methods=["GET"])
 @login_required
 def invoice_delete(number):

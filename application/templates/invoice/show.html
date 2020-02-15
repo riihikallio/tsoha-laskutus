@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<script>
+  var tab = "inv"
+</script>
+    <table width="100%" class="mt-3">
+      <tr>
+        <td rowspan="3" width="50%"><h1>Firma.fi</h1></td>
+        <td><b>Invoice</b></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td width="1%">Invoice</td>
+        <td align="left">#{{ inv.number }}</td>
+      </tr>
+      <tr>
+        <td width="1%" >Date</td>
+        <td align="left">{{ inv.date_modified|datetime }}</td>
+      </tr>
+    </table>
+    <table width="100%" class="mt-5">
+    <thead>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Qty</th>
+      <th>Unit</th>
+   </thead>
+    <tbody>
+    {% for row in inv.rows %}
+      <tr>
+      <td>{{ row.product.name }}</td>
+      <td>{{ row.product.price|decimal }}€</td>
+      <td>{{ row.count }}</td>
+      <td>{{ row.product.unit }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    <a class="btn btn-outline-secondary mt-3" role="button" href="{{ url_for('invoices_index') }}">
+        Close
+    </a>
+  {% endblock %}
