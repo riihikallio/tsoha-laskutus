@@ -28,13 +28,13 @@ def check_access(num):
     return False
 
 
-# OK
+
 @app.route("/invoices/", methods=["GET"])
 @login_required
 def invoices_index():
     return render_template("invoice/list.html", invoices=current_user.invoices)
 
-# OK
+
 @app.route("/invoices/edit/<int:number>/", methods=["GET"])
 @login_required
 def invoice_edit(number):
@@ -56,8 +56,6 @@ def invoice_edit(number):
 @app.route("/invoices/<int:number>/", methods=["GET"])
 @login_required
 def invoice_show(number):
-    if not check_access(number):
-        return redirect(url_for("invoices_index"))
     if not check_access(number):
         return redirect(url_for("invoices_index"))
     inv = Invoice.query.get(number)
