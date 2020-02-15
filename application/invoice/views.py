@@ -70,9 +70,9 @@ def invoice_show(number):
 @app.route("/invoices/<int:number>/", methods=["POST"])
 @login_required
 def invoice_save(number):
-     if not check_access(number):
+    if not check_access(number):
         return redirect(url_for("invoices_index"))
-   form = InvoiceForm(request.form)
+    form = InvoiceForm(request.form)
     if not form.validate():
         return render_template("invoice/edit.html", form=form, num=0)
     rows = []
@@ -84,6 +84,7 @@ def invoice_save(number):
         if formRow["product"] and count > 0:
             rows.append(Row(formRow["product"], count))
     inv = Invoice(form.customer.data, rows)
+    inv.number = number
     if bool(inv) and bool(inv.customer) and bool(inv.customer.name) and len(inv.rows) > 0:
         old = Invoice.query.get(number)
         if bool(old):
