@@ -15,7 +15,6 @@ def invoices_init():
     prod = Product.query.first()
     row = Row(prod, 1)
     inv = Invoice(cust, [row])
-    print("########## SAVE ###########")
     db.session().add(row)
     db.session().add(inv)
     db.session().commit()
@@ -26,7 +25,6 @@ def check_access(num):
     for inv in current_user.invoices:
         if inv.number == num:
             return True
-    print("****** Access denied *******")
     return False
 
 
@@ -60,6 +58,8 @@ def invoice_edit(number):
 def invoice_show(number):
     if not check_access(number):
         return redirect(url_for("invoices_index"))
+    if not check_access(number):
+        return redirect(url_for("invoices_index"))
     inv = Invoice.query.get(number)
     if bool(inv):
         return render_template("invoice/show.html", inv=inv)
@@ -70,7 +70,9 @@ def invoice_show(number):
 @app.route("/invoices/<int:number>/", methods=["POST"])
 @login_required
 def invoice_save(number):
-    form = InvoiceForm(request.form)
+     if not check_access(number):
+        return redirect(url_for("invoices_index"))
+   form = InvoiceForm(request.form)
     if not form.validate():
         return render_template("invoice/edit.html", form=form, num=0)
     rows = []
