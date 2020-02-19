@@ -13,14 +13,14 @@ def products_index():
 @app.route("/products/<int:number>/", methods=["GET"])
 @login_required
 def product_edit(number):
-    p = Product.query.get(number)
-    f = ProductForm()
-    f.name.data = p.name
-    f.unit.data = p.unit
-    f.price.data = p.price
-    f.category.data = p.category
-    if bool(p):
-        return render_template("product/edit.html", form=f, num=p.number)
+    prod = Product.query.get(number)
+    form = ProductForm()
+    form.name.data = prod.name
+    form.unit.data = prod.unit
+    form.price.data = prod.price
+    form.category.data = prod.category
+    if bool(prod):
+        return render_template("product/edit.html", form=form, num=prod.number)
     else:
         return redirect(url_for("products_index"))
 
@@ -28,15 +28,15 @@ def product_edit(number):
 @app.route("/products/<int:number>/", methods=["POST"])
 @login_required
 def product_save(number):
-    f = ProductForm(request.form)
-    if not f.validate():
-        return render_template("product/edit.html", form=f, num=number)
-    p = Product.query.get(number)
-    if bool(p) and bool(f.name.data):
-        p.name = f.name.data
-        p.unit = f.unit.data
-        p.price = f.price.data
-        p.category = f.category.data
+    form = ProductForm(request.form)
+    if not form.validate():
+        return render_template("product/edit.html", form=form, num=number)
+    prod = Product.query.get(number)
+    if bool(prod) and bool(form.name.data):
+        prod.name = form.name.data
+        prod.unit = form.unit.data
+        prod.price = form.price.data
+        prod.category = form.category.data
         db.session().commit()
     return redirect(url_for("products_index"))
 
@@ -50,12 +50,12 @@ def product_form():
 @app.route("/products/", methods=["POST"])
 @login_required
 def product_create():
-    f = ProductForm(request.form)
-    if not f.validate():
-        return render_template("product/edit.html", form = f, num=0)
-    p = Product(f.name.data, f.unit.data, f.price.data, f.category.data)
-    if bool(p.name):
-        db.session().add(p)
+    form = ProductForm(request.form)
+    if not form.validate():
+        return render_template("product/edit.html", form = form, num=0)
+    prod = Product(form.name.data, form.unit.data, form.price.data, form.category.data)
+    if bool(prod.name):
+        db.session().add(prod)
         db.session().commit()
     return redirect(url_for("products_index"))
 
@@ -63,8 +63,8 @@ def product_create():
 @app.route("/products/del/<int:number>/", methods=["GET"])
 @login_required
 def product_delete(number):
-    p = Product.query.get(number)
-    if bool(p):
-        db.session().delete(p)
+    prod = Product.query.get(number)
+    if bool(prod):
+        db.session().delete(prod)
         db.session().commit()
     return redirect(url_for("products_index"))

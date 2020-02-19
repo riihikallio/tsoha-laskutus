@@ -30,12 +30,12 @@ def auth_new():
 
 @app.route("/auth/new", methods=["POST"])
 def auth_create():
-    f = LoginForm(request.form)
-    if not f.validate():
-        return render_template("auth/loginform.html", form=f, action="auth_create", button="Create")
-    u = User(f.username.data, f.username.data, f.password.data)
-    if bool(u.name):
-        db.session().add(u)
+    form = LoginForm(request.form)
+    if not form.validate():
+        return render_template("auth/loginform.html", form=form, action="auth_create", button="Create")
+    user = User(form.username.data, form.username.data, form.password.data)
+    if bool(user.name):
+        db.session().add(user)
         db.session().commit()
-        login_user(u)
+        login_user(user)
     return redirect(url_for("index"))

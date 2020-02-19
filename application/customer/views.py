@@ -14,12 +14,12 @@ def customers_index():
 @app.route("/customers/<int:number>/", methods=["GET"])
 @login_required
 def customer_edit(number):
-    c = Customer.query.get(number)
-    f = CustomerForm()
-    f.name.data = c.name
-    f.address.data = c.address
-    if bool(c):
-        return render_template("customer/edit.html", form=f, num=c.number)
+    cust = Customer.query.get(number)
+    form = CustomerForm()
+    form.name.data = cust.name
+    form.address.data = cust.address
+    if bool(cust):
+        return render_template("customer/edit.html", form=form, num=cust.number)
     else:
         return redirect(url_for("customers_index"))
 
@@ -27,13 +27,13 @@ def customer_edit(number):
 @app.route("/customers/<int:number>/", methods=["POST"])
 @login_required
 def customer_save(number):
-    f = CustomerForm(request.form)
-    if not f.validate():
-        return render_template("customer/edit.html", form = f, num=number)
-    c = Customer.query.get(number)
-    if bool(c) and bool(f.name.data):
-        c.name = f.name.data
-        c.address = f.address.data
+    form = CustomerForm(request.form)
+    if not form.validate():
+        return render_template("customer/edit.html", form = form, num=number)
+    cust = Customer.query.get(number)
+    if bool(cust) and bool(form.name.data):
+        cust.name = form.name.data
+        cust.address = form.address.data
         db.session().commit()
     return redirect(url_for("customers_index"))
 
@@ -47,12 +47,12 @@ def customer_form():
 @app.route("/customers/", methods=["POST"])
 @login_required
 def customer_create():
-    f = CustomerForm(request.form)
-    if not f.validate():
-        return render_template("customer/edit.html", form = f, num=0)
-    c = Customer(f.name.data, f.address.data)
-    if bool(c.name):
-        db.session().add(c)
+    form = CustomerForm(request.form)
+    if not form.validate():
+        return render_template("customer/edit.html", form = form, num=0)
+    cust = Customer(form.name.data, form.address.data)
+    if bool(cust.name):
+        db.session().add(cust)
         db.session().commit()
     return redirect(url_for("customers_index"))
 
@@ -60,8 +60,8 @@ def customer_create():
 @app.route("/customers/del/<int:number>/", methods=["GET"])
 @login_required
 def customer_delete(number):
-    c = Customer.query.get(number)
-    if bool(c):
-        db.session().delete(c)
+    cust = Customer.query.get(number)
+    if bool(cust):
+        db.session().delete(cust)
         db.session().commit()
     return redirect(url_for("customers_index"))
