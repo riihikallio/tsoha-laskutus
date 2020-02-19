@@ -6,7 +6,7 @@ class Customer(db.Model):
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
     onupdate=db.func.current_timestamp())
 
-    name = db.Column(db.String(144), nullable=False)
+    name = db.Column(db.String(144), nullable=False, index=True)
     address = db.Column(db.String(255))
 
     def __init__(self, name, address):

@@ -10,7 +10,7 @@ class User(db.Model):
                               onupdate=db.func.current_timestamp())
 
     name = db.Column(db.String(144), nullable=False)
-    username = db.Column(db.String(144), nullable=False, index=True)
+    username = db.Column(db.String(144), nullable=False, index=True, unique=True)
     password = db.Column(db.String(144), nullable=False, index=True)
 
     invoices = db.relationship("Invoice", backref='account', lazy=True)
