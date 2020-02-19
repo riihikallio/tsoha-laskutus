@@ -18,13 +18,12 @@ from application import views
 
 from application.customer import models
 from application.customer import views
-
 from application.product import views
 from application.invoice import views
+from application.reports import views
 
 from application.auth import models 
 from application.auth import views
-
 from application.auth.models import User
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
