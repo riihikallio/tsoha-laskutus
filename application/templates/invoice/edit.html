@@ -32,7 +32,7 @@
           {% for r in form.rows %}
           <tr data-toggle="fieldset-entry">
             <td>{{ r.product(class_='form-control') }}</td>
-            <td>{{ r.count(class_='form-control') }}</td>
+            <td>{{ r.qty(class_='form-control') }}</td>
           </tr>
           {% endfor %}
         </tbody>

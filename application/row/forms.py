@@ -10,7 +10,7 @@ def get_products():
 
 class RowForm(FlaskForm, ModelForm):
     product = QuerySelectField('Product', query_factory=get_products, get_label='name', allow_blank=True)
-    count = StringField("Count")
+    qty = StringField("Qty")
 
     class Meta:
         csrf = False

@@ -8,13 +8,13 @@ class Row(db.Model):
 
     product_num = db.Column(db.Integer, db.ForeignKey('product.number'), nullable=False)
     product = db.relationship("Product")
-    count = db.Column(db.Integer, nullable=False)
+    qty = db.Column(db.Integer, nullable=False)
 
     invoice_num = db.Column(db.Integer, db.ForeignKey('invoice.number'), nullable=False)
 
-    def __init__(self, product, count):
+    def __init__(self, product, qty):
         self.product = product
-        self.count = count
+        self.qty = qty
 
     def __str__(self):
-        return "*** prod: {}, qty: {}".format(self.product.name, self.count)
+        return "*** prod: {}, qty: {}".format(self.product.name, self.qty)

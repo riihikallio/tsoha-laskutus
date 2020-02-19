@@ -44,7 +44,7 @@ def invoice_edit(number):
     form = InvoiceForm()
     form.customer.data = inv.customer
     for row in inv.rows:
-        form.rows.append_entry({"product": row.product, "count": row.count})
+        form.rows.append_entry({"product": row.product, "qty": row.qty})
     form.rows.append_entry()
     form.rows.append_entry()
     if bool(inv):
@@ -61,7 +61,7 @@ def invoice_show(number):
     inv = Invoice.query.get(number)
     total = 0
     for row in inv.rows:
-        total += row.product.price*row.count
+        total += row.product.price*row.qty
     if bool(inv):
         return render_template("invoice/show.html", inv=inv, tot=total)
     else:
@@ -79,11 +79,11 @@ def invoice_save(number):
     rows = []
     for formRow in form.rows.data:
         try:
-            count = float(formRow["count"])
+            qty = float(formRow["qty"])
         except ValueError:
             continue
-        if formRow["product"] and count > 0:
-            rows.append(Row(formRow["product"], count))
+        if formRow["product"] and qty > 0:
+            rows.append(Row(formRow["product"], qty))
     inv = Invoice(form.customer.data, rows)
     inv.number = number
     if bool(inv) and bool(inv.customer) and bool(inv.customer.name) and len(inv.rows) > 0:
@@ -118,11 +118,11 @@ def invoice_create():
     rows = []
     for formRow in form.rows.data:
         try:
-            count = float(formRow["count"])
+            qty = float(formRow["qty"])
         except ValueError:
             continue
-        if formRow["product"] and count >= 0:
-            rows.append(Row(formRow["product"], count))
+        if formRow["product"] and qty >= 0:
+            rows.append(Row(formRow["product"], qty))
     inv = Invoice(form.customer.data, rows)
     if bool(inv) and bool(inv.customer) and bool(inv.customer.name) and len(inv.rows) > 0:
         db.session().add(inv)
