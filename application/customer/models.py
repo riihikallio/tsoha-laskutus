@@ -9,8 +9,6 @@ class Customer(db.Model):
     name = db.Column(db.String(144), nullable=False)
     address = db.Column(db.String(255))
 
-    # invoices = db.relationship("Invoice", backref='customer', lazy=True)
-
     def __init__(self, name, address):
         self.name = name
         self.address = address

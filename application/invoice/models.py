@@ -7,9 +7,9 @@ class Invoice(db.Model):
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
     onupdate=db.func.current_timestamp())
 
-    customer_num = db.Column(db.Integer, db.ForeignKey('customer.number'), nullable=False)
+    customer_num = db.Column(db.Integer, db.ForeignKey('customer.number'), nullable=False, index=True)
     customer = db.relationship("Customer")
-    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False, index=True)
 
     rows = db.relationship("Row", backref="invoice", cascade="delete")
 
