@@ -3,6 +3,11 @@ from flask import redirect, render_template, request, url_for
 from flask_login import login_required
 from application.product.models import Product
 from application.product.forms import ProductForm
+from application.row.models import Row
+
+
+def deletable(number):
+    return Row.query.filter_by(product_num=number).count() == 0
 
 
 @app.route("/products/", methods=["GET"])
@@ -20,7 +25,7 @@ def product_edit(number):
     form.price.data = prod.price
     form.category.data = prod.category
     if bool(prod):
-        return render_template("product/edit.html", form=form, num=prod.number)
+        return render_template("product/edit.html", form=form, num=number, delete=deletable(number))
     else:
         return redirect(url_for("products_index"))
 
@@ -30,7 +35,7 @@ def product_edit(number):
 def product_save(number):
     form = ProductForm(request.form)
     if not form.validate():
-        return render_template("product/edit.html", form=form, num=number)
+        return render_template("product/edit.html", form=form, num=number, delete=deletable(number))
     prod = Product.query.get(number)
     if bool(prod) and bool(form.name.data):
         prod.name = form.name.data
@@ -44,7 +49,7 @@ def product_save(number):
 @app.route("/products/new/", methods=["GET"])
 @login_required
 def product_form():
-    return render_template("product/edit.html", form=ProductForm(), num=0)
+    return render_template("product/edit.html", form=ProductForm(), num=0, delete=False)
 
 
 @app.route("/products/", methods=["POST"])
@@ -52,7 +57,7 @@ def product_form():
 def product_create():
     form = ProductForm(request.form)
     if not form.validate():
-        return render_template("product/edit.html", form = form, num=0)
+        return render_template("product/edit.html", form = form, num=0, delete=False)
     prod = Product(form.name.data, form.unit.data, form.price.data, form.category.data)
     if bool(prod.name):
         db.session().add(prod)
@@ -64,7 +69,7 @@ def product_create():
 @login_required
 def product_delete(number):
     prod = Product.query.get(number)
-    if bool(prod):
+    if bool(prod) and deletable(number):
         db.session().delete(prod)
         db.session().commit()
     return redirect(url_for("products_index"))

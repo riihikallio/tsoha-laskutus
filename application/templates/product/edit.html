@@ -6,9 +6,9 @@
 </script>
 {% if num != 0 %}
 <form method="POST" action="{{ url_for('product_save', number=num) }}">
-  {% else %}
-  <form method="POST" action="{{ url_for('product_create') }}">
-    {% endif %}
+{% else %}
+<form method="POST" action="{{ url_for('product_create') }}">
+{% endif %}
     <table>
       <tr>
         <td style="vertical-align:baseline">{{ form.name.label }}</td>
@@ -56,7 +56,7 @@
       </tr>
       <tr>
         <td>
-          {% if num != 0 %}
+          {% if delete %}
           <a class="btn btn-outline-danger" role="button" href="{{ url_for('product_delete', number=num) }}">
             Delete
           </a>
@@ -69,4 +69,4 @@
       </tr>
     </table>
   </form>
-  {% endblock %}
+{% endblock %}
