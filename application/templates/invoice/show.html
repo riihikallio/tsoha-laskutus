@@ -18,6 +18,13 @@
         <td width="1%" >Date</td>
         <td align="left">{{ inv.date_modified|datetime }}</td>
       </tr>
+      <tr>
+      <td>{{ inv.customer.name }}</td>
+      </tr>
+    </tr>
+      <tr>
+      <td style="white-space: pre-wrap;">{{ inv.customer.address }}</td>
+      </tr>
     </table>
     <table width="100%" class="mt-5">
     <thead>
