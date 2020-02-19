@@ -59,8 +59,11 @@ def invoice_show(number):
     if not check_access(number):
         return redirect(url_for("invoices_index"))
     inv = Invoice.query.get(number)
+    total = 0
+    for row in inv.rows:
+        total += row.product.price*row.count
     if bool(inv):
-        return render_template("invoice/show.html", inv=inv)
+        return render_template("invoice/show.html", inv=inv, tot=total)
     else:
         return redirect(url_for("invoices_index"))
 
@@ -72,7 +75,7 @@ def invoice_save(number):
         return redirect(url_for("invoices_index"))
     form = InvoiceForm(request.form)
     if not form.validate():
-        return render_template("invoice/edit.html", form=form, num=0)
+        return render_template("invoice/edit.html", form=form, num=number)
     rows = []
     for formRow in form.rows.data:
         try:

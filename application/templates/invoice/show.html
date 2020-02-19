@@ -35,6 +35,10 @@
       <td>{{ row.product.unit }}</td>
       </tr>
     {% endfor %}
+    <tr>
+    <td><b>Total:</b></td>
+    <td><b>{{ tot|decimal }}€</b></td>
+    </tr>
     </tbody>
     </table>
     <a class="btn btn-outline-secondary mt-3" role="button" href="{{ url_for('invoices_index') }}">
