@@ -6,6 +6,7 @@ def sales_by_category():
   stmt += " LEFT JOIN Invoice ON Invoice.number = Row.invoice_num"
   stmt += " LEFT JOIN Account ON Account.id = Invoice.account_id"
   stmt += " GROUP BY Product.category, Account.id"
+  stmt += " ORDER BY Product.category, Account.username"
 
   res = db.engine.execute(stmt)
   
@@ -39,6 +40,7 @@ def sales_by_customer():
   stmt += " LEFT JOIN Row ON Row.invoice_num = Invoice.number"
   stmt += " LEFT JOIN Product ON Product.number = Row.product_num"
   stmt += " GROUP BY Customer.name, Product.category"
+  stmt += " ORDER BY Customer.name, Product.category"
 
   res = db.engine.execute(stmt)
   
