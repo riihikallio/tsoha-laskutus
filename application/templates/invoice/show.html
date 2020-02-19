@@ -19,7 +19,7 @@
         <td align="left">{{ inv.date_modified|datetime }}</td>
       </tr>
       <tr>
-      <td>{{ inv.customer.name }}</td>
+      <td class="pt-3">{{ inv.customer.name }}</td>
       </tr>
     </tr>
       <tr>
@@ -29,22 +29,24 @@
     <table width="100%" class="mt-5">
     <thead>
       <th>Product</th>
-      <th>Price</th>
-      <th>Qty</th>
-      <th>Unit</th>
+      <th style="text-align: right">Price</th>
+      <th style="text-align: right">Qty</th>
+      <th style="text-align: right">Unit</th>
+      <th style="text-align: right">Total</th>
    </thead>
     <tbody>
     {% for row in inv.rows %}
       <tr>
       <td>{{ row.product.name }}</td>
-      <td>{{ row.product.price|decimal }}€</td>
-      <td>{{ row.qty }}</td>
-      <td>{{ row.product.unit }}</td>
+      <td style="text-align: right">{{ row.product.price|decimal }}€</td>
+      <td style="text-align: right">{{ row.qty }}</td>
+      <td style="text-align: right">{{ row.product.unit }}</td>
+      <td style="text-align: right">{{ (row.qty*row.product.price)|decimal }}€</td>
       </tr>
     {% endfor %}
     <tr>
-    <td><b>Total:</b></td>
-    <td><b>{{ tot|decimal }}€</b></td>
+    <td colspan="4" style="text-align: right"><b>Total:</b></td>
+    <td style="text-align: right"><b>{{ tot|decimal }}€</b></td>
     </tr>
     </tbody>
     </table>
