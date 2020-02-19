@@ -29,7 +29,7 @@
       </tr>
       <tr>
         <td>
-          {% if num != 0 %}
+          {% if delete %}
           <a class="btn btn-outline-danger" role="button"
             href="{{ url_for('customer_delete', number=num) }}">
             Delete

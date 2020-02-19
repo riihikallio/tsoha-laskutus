@@ -3,6 +3,11 @@ from flask import redirect, render_template, request, url_for
 from flask_login import login_required
 from application.customer.models import Customer
 from application.customer.forms import CustomerForm
+from application.invoice.models import Invoice
+
+
+def deletable(number):
+    return Invoice.query.filter_by(customer_num=number).count() == 0
 
 
 @app.route("/customers/", methods=["GET"])
@@ -19,7 +24,7 @@ def customer_edit(number):
     form.name.data = cust.name
     form.address.data = cust.address
     if bool(cust):
-        return render_template("customer/edit.html", form=form, num=cust.number)
+        return render_template("customer/edit.html", form=form, num=cust.number, delete=deletable(cust.number))
     else:
         return redirect(url_for("customers_index"))
 
@@ -29,7 +34,7 @@ def customer_edit(number):
 def customer_save(number):
     form = CustomerForm(request.form)
     if not form.validate():
-        return render_template("customer/edit.html", form = form, num=number)
+        return render_template("customer/edit.html", form = form, num=number, delete=deletable(number))
     cust = Customer.query.get(number)
     if bool(cust) and bool(form.name.data):
         cust.name = form.name.data
@@ -41,7 +46,7 @@ def customer_save(number):
 @app.route("/customers/new/", methods=["GET"])
 @login_required
 def customer_form():
-    return render_template("customer/edit.html", form=CustomerForm(), num=0)
+    return render_template("customer/edit.html", form=CustomerForm(), num=0, delete=False)
 
 
 @app.route("/customers/", methods=["POST"])
@@ -49,7 +54,7 @@ def customer_form():
 def customer_create():
     form = CustomerForm(request.form)
     if not form.validate():
-        return render_template("customer/edit.html", form = form, num=0)
+        return render_template("customer/edit.html", form = form, num=0, delete=False)
     cust = Customer(form.name.data, form.address.data)
     if bool(cust.name):
         db.session().add(cust)
@@ -61,7 +66,7 @@ def customer_create():
 @login_required
 def customer_delete(number):
     cust = Customer.query.get(number)
-    if bool(cust):
+    if bool(cust) and deletable(number):
         db.session().delete(cust)
         db.session().commit()
     return redirect(url_for("customers_index"))
