@@ -11,7 +11,7 @@ def tabulate(res):
       prev = row[0]
       result.append([row[0], "", ""])
     elif not prev == row[0]:  # Subtotal
-      result.append(["", Total:", '{:.2f}€'.format(total)])
+      result.append(["", "Total:", '{:.2f}€'.format(total)])
       total = 0
       prev = row[0]
       result.append([row[0], "", ""])
@@ -19,7 +19,7 @@ def tabulate(res):
     total += row[2]
     grand += row[2]
 
-  result.append(["", Total:", '{:.2f}€'.format(total)])
+  result.append(["", "Total:", '{:.2f}€'.format(total)])
   result.append(["Grand total:", "", '{:.2f}€'.format(grand)])  
   return result
 
