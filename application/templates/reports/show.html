@@ -1,35 +1,30 @@
 {% extends "layout.html" %}
 
+{% macro report(rows) %}
+<table>
+  <tbody>
+    <tbody>
+    {% for row in rows %}
+    <tr>
+      <th class="px-3">{{ row[0] }}</th>
+      <td class="px-3">{{ row[1] }}</td>
+      <td class="px-3" align="right">{{ row[2] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  </tbody>
+</table>
+{% endmacro %}
+
 {% block body %}
 <script>
   var tab = "rep"
 </script>
+
 <h4>Sales by product category by salesperson:</h4>
-<table>
-  <tbody>
-    <tbody>
-    {% for row in cat %}
-    <tr>
-      <td class="px-3">{{ row[0] }}</td>
-      <td class="px-3">{{ row[1] }}</td>
-      <td class="px-3" align="right">{{ row[2] }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-  </tbody>
-</table>
+{{ report(cat)}}
+
 <h4 class="mt-3">Sales by customer by product category:</h4>
-<table>
-  <tbody>
-    <tbody>
-    {% for row in cust %}
-    <tr>
-      <td class="px-3">{{ row[0] }}</td>
-      <td class="px-3">{{ row[1] }}</td>
-      <td class="px-3" align="right">{{ row[2] }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-  </tbody>
-</table>
+{{ report(cust)}}
+
 {% endblock %}
