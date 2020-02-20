@@ -1,8 +1,8 @@
 # Tietokantakuvaus
 
-Tietokanta on täysin normalisoitu, mikä ei oikein sovi laskutukseen. Nyt, jos asiakkaan tai tuotteen tietoja muokataan, niin muutokset vaikuttavat myös vanhoihin laskuihin: esimerkiksi hinta muuttuu. Oikeasti laskulle pitäisi kopioida senhetkiset tiedot asiakkaasta ja tuotteesta eli denormalisoida. Nykyisessä ratkaisussa  viite-eheyden varmistamiseksi asiakasta tai tuotetta ei voi poistaa, jos se esiintyy jollain laskulla.
+Tietokanta on täysin normalisoitu, mikä ei todellisuudessa oikein sovi laskutukseen. Nyt, jos asiakkaan tai tuotteen tietoja muokataan, niin muutokset vaikuttavat myös vanhoihin laskuihin: esimerkiksi hinta muuttuu. Oikeasti laskulle pitäisi kopioida senhetkiset tiedot asiakkaasta ja tuotteesta eli denormalisoida. Nykyisessä ratkaisussa  viite-eheyden varmistamiseksi asiakasta tai tuotetta ei voi poistaa, jos se esiintyy jollain laskulla. Denormalisoinnin yhteydessä voisi laskea rivisumman (product.price*row.qty) ja tallentaa sen riville valmiiksi. Laskun loppusumman tallentamista voisi harkita.
 
-Indeksejä on aika paljon. Pääavaimet indeksoidaan automaattisesti, mutta myös kaikki viiteavaimet on indeksoitu. Lisäksi on indeksoitu käyttäjien nimet ja salasanat sisäänkirjautumista varten. Tuoteryhmät ja asiakkaiden nimet on indeksoitu raportointia varten. Jos raportteja ajetaan harvoin, niin niiden indeksoinnin mielekkyyden voi kyseenalaistaa.
+Indeksejä on aika paljon. Pääavaimet indeksoidaan automaattisesti, mutta myös kaikki muut viiteavaimet on indeksoitu. Lisäksi on indeksoitu käyttäjien nimet ja salasanat sisäänkirjautumista varten. Tuoteryhmät ja asiakkaiden nimet on indeksoitu raportointia varten. Jos raportteja ajetaan harvoin, niin niiden indeksoinnin mielekkyyden voi kyseenalaistaa.
 
 ![Kaavio](https://github.com/riihikallio/tsoha/blob/master/documentation/kaavio.png)
 
