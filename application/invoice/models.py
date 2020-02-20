@@ -1,12 +1,9 @@
 from flask_login import current_user
 from application import db
+from application.models import Base
 
-class Invoice(db.Model):
+class Invoice(Base):
     number = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-    onupdate=db.func.current_timestamp())
-
     customer_num = db.Column(db.Integer, db.ForeignKey('customer.number'), nullable=False, index=True)
     customer = db.relationship("Customer")
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False, index=True)
