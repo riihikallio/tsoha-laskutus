@@ -12,5 +12,5 @@
 ## Herokuun
 
 1. Lisää Herokuun PostgreSQL-kanta joko selaimessa tai komennolla `heroku addons:add heroku-postgresql:hobby-dev`
-2. Määrittele Herokuun ympäristömuuttujalle *HEROKU* arvo 1 joka selaimessa tai komennolla `heroku config:set HEROKU=1`
+2. Määrittele Herokuun ympäristömuuttujalle *HEROKU* arvoksi 1 joko selaimessa tai komennolla `heroku config:set HEROKU=1`
 3. Lataa sovellus Herokuun
