@@ -2,7 +2,7 @@ from application import app, db
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 from application.invoice.models import Invoice
-from application.invoice.forms import InvoiceForm, RowForm
+from application.invoice.forms import InvoiceForm
 from application.row.models import Row
 from application.customer.models import Customer
 from application.product.models import Product

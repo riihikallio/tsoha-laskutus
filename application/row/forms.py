@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, FloatField, IntegerField, HiddenField, SelectField, validators, FormField
-from wtforms_alchemy import ModelForm, ModelFieldList
+from wtforms import StringField
+from wtforms_alchemy import ModelForm
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from application.row.models import Row
 from application.product.models import Product
