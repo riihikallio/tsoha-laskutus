@@ -8,7 +8,8 @@ Indeksejä on aika paljon. Pääavaimet indeksoidaan automaattisesti, mutta myö
 
 ## SQL-taulujen luonti
 
-`CREATE TABLE customer (
+```sql
+CREATE TABLE customer (
 	number INTEGER NOT NULL, 
 	date_created DATETIME, 
 	date_modified DATETIME, 
@@ -59,6 +60,7 @@ CREATE TABLE "row" (
 	PRIMARY KEY (id), 
 	FOREIGN KEY(product_num) REFERENCES product (number), 
 	FOREIGN KEY(invoice_num) REFERENCES invoice (number)
-)`
+)
+```
 
 ## Käytetyt SQL-kyselyt
