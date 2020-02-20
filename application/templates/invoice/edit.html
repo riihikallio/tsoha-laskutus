@@ -36,14 +36,14 @@
     </div>
     <table width="100%">
       <tr>
-        <td>
+        <td style="vertical-align:baseline" class="pt-3">
           {% if num != 0 %}
           <a class="btn btn-outline-danger" role="button" href="{{ url_for('invoice_delete', number=num) }}">
             Delete
           </a>
           {% endif %}
         </td>
-        <td align="right" class="pt-3">
+        <td style="vertical-align:baseline" align="right" class="pt-3">
           <input class="btn btn-outline-primary" type="submit" value="Save" />
           <a class="btn btn-outline-secondary" type="button" href="{{ url_for('invoices_index') }}">Cancel</a>
         </td>

@@ -27,7 +27,7 @@
 	      </td>
       </tr>
       <tr>
-        <td>
+        <td style="vertical-align:baseline" class="pt-3">
           {% if delete %}
           <a class="btn btn-outline-danger" role="button"
             href="{{ url_for('customer_delete', number=num) }}">
@@ -35,7 +35,7 @@
           </a>
           {% endif %}
         </td>
-        <td align="right" class="pt-3">
+        <td style="vertical-align:baseline" align="right" class="pt-3">
           <input class="btn btn-outline-primary" type="submit" value="Save" />
           <a class="btn btn-outline-secondary" type="button" href="{{ url_for('customers_index') }}">Cancel</a>
         </td>
