@@ -33,7 +33,7 @@ def auth_create():
     form = LoginForm(request.form)
     if not form.validate():
         return render_template("auth/loginform.html", form=form, action="auth_create", button="Create")
-    user = User(form.username.data, form.username.data, form.password.data)
+    user = User(form.username.data.capitalize(), form.username.data, form.password.data)
     if bool(user.name):
         db.session().add(user)
         db.session().commit()

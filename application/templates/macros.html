@@ -1,0 +1,7 @@
+{% macro errorlst(errors) %}
+<ul>
+  {% for error in errors %}
+  <li><span class="text-danger">{{ error }}</span></li>
+  {% endfor %}
+</ul>
+{% endmacro %}

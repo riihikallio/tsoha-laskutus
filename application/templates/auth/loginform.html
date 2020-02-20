@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<div class="text-danger"></div>{{ error }}</div>
+<div class="text-danger">{{ error }}</div>
 <form method="POST" action="{{ url_for(action) }}">
   <table>
     <tr>
@@ -12,11 +12,7 @@
         {{ form.username }}
       </td>
       <td style="vertical-align:baseline">
-        <ul>
-          {% for error in form.username.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+        {{ errorlst(form.username.errors) }}
       </td>
     </tr>
     <tr>
@@ -25,6 +21,9 @@
       </td>
       <td style="vertical-align:baseline">
         {{ form.password }}
+      </td>
+      <td style="vertical-align:baseline">
+        {{ errorlst(form.password.errors) }}
       </td>
     </tr>
     <tr>

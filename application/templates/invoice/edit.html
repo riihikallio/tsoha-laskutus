@@ -14,11 +14,7 @@
         <td style="vertical-align:baseline">{{ form.customer.label }}</td>
         <td style="vertical-align:baseline">{{ form.customer(class_='form-control') }}</td>
         <td style="vertical-align:baseline">
-          <ul>
-            {% for error in form.customer.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-          </ul>
+          {{ errorlst(form.customer.errors) }}
         </td>
       </tr>
     </table>
@@ -47,7 +43,7 @@
           </a>
           {% endif %}
         </td>
-        <td align="right">
+        <td align="right" class="pt-3">
           <input class="btn btn-outline-primary" type="submit" value="Save" />
           <a class="btn btn-outline-secondary" type="button" href="{{ url_for('invoices_index') }}">Cancel</a>
         </td>

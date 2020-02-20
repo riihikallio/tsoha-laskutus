@@ -1,3 +1,4 @@
+{% from "macros.html" import errorlst %}
 <!DOCTYPE html>
 <html>
 
@@ -29,7 +30,7 @@
       <span class="navbar-text">
       {% if current_user.is_authenticated %}
         <a class="btn btn-outline-primary" role="button" href="{{ url_for('auth_logout') }}">
-          Logout {{ current_user.username }}
+          Logout {{ current_user.name }}
         </a>
       {% else %}
         <a class="btn btn-outline-secondary" role="button"
