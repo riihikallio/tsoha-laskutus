@@ -21,3 +21,5 @@ Käyttäjä | Muokata laskun rivejä  | | X
 Käyttäjä | Poistaa laskun rivin  | | X
 Esimies | Nähdä tuoteryhmien myyntiraportin  | | X
 Esimies | Nähdä asiakkaiden myyntiraportin  | | X
+
+## Vastaavat SQL-kyselyt
