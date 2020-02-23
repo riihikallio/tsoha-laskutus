@@ -21,12 +21,12 @@
     </tr>
     {% endfor %}
     <tr>
-      <td>
+      <td style="vertical-align: middle">
           <a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('customer_form') }}">
             Add
           </a>
       </td>
-      <td>
+      <td style="vertical-align: middle">
         {{ pagination("customers_index", page, last) }}
       </td>
     </tr>

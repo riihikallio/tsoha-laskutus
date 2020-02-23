@@ -37,7 +37,8 @@ def invoices_index():
     page = request.args.get('page', default = 1, type = int)
     page = page if page >= 1 else 1
     page = page if page <= last else last
-    return render_template("invoice/list.html", invoices=current_user.invoices, page=page, last=last)
+    invoices = Invoice.query.filter_by(account_id=current_user.id).paginate(page=page, per_page=5, error_out=False).items
+    return render_template("invoice/list.html", invoices=invoices, page=page, last=last)
 
 
 @app.route("/invoices/edit/<int:number>/", methods=["GET"])

@@ -27,7 +27,7 @@
     </tr>
     {% endfor %}
     <tr>
-      <td>
+      <td style="vertical-align: middle">
         {% if current_user.is_authenticated %}
           <a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('product_form') }}">
             Add
@@ -36,7 +36,7 @@
       </td>
       <td></td>
       <td></td>
-      <td>
+      <td style="vertical-align: middle">
         {{ pagination("products_index", page, last) }}
       </td>
     </tr>
