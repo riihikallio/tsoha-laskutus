@@ -13,7 +13,13 @@ def deletable(number):
 @app.route("/customers/", methods=["GET"])
 @login_required
 def customers_index():
-    return render_template("customer/list.html", customers=Customer.query.all())
+    last = int((Customer.query.count()-1)/5)+1
+    last = last if last > 0 else 1
+    page = request.args.get('page', default = 1, type = int)
+    page = page if page >= 1 else 1
+    page = page if page <= last else last
+    customers = Customer.query.paginate(page=page, per_page=5, error_out=False).items
+    return render_template("customer/list.html", customers=customers, page=page, last=last)
 
 
 @app.route("/customers/<int:number>/", methods=["GET"])

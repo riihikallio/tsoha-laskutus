@@ -26,11 +26,20 @@
       </td>
     </tr>
     {% endfor %}
+    <tr>
+      <td>
+        {% if current_user.is_authenticated %}
+          <a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('product_form') }}">
+            Add
+          </a>
+        {% endif %}
+      </td>
+      <td></td>
+      <td></td>
+      <td>
+        {{ pagination("products_index", page, last) }}
+      </td>
+    </tr>
   </tbody>
 </table>
-{% if current_user.is_authenticated %}
-<a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('product_form') }}">
-  Add
-</a>
-{% endif %}
 {% endblock %}

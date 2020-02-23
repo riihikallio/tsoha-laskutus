@@ -4,16 +4,32 @@
 <script>
   var tab="cust"
 </script>
-<ul style="list-style-type:none">
-{% for customer in customers %}
-<li>
-  <a href="{{ url_for('customer_edit', number=customer.number) }}">
-    {{ customer.name }}
-  </a>
-</li>
-{% endfor %}
-</ul>
-<a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('customer_form') }}">
-  Add
-</a>
+<table>
+  <thead>
+    <th style="text-align:center">Customer</th>
+    <th></th>
+  </thead>
+  <tbody>
+    {% for customer in customers %}
+    <tr>
+      <td class="px-3">{{ customer.name }}</td>
+      <td class="px-3">
+        <a class="btn btn-outline-primary" role="button" href="{{ url_for('customer_edit', number=customer.number) }}">
+          Edit
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td>
+          <a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('customer_form') }}">
+            Add
+          </a>
+      </td>
+      <td>
+        {{ pagination("customers_index", page, last) }}
+      </td>
+    </tr>
+  </tbody>
+</table>
 {% endblock %}

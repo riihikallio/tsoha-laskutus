@@ -12,7 +12,13 @@ def deletable(number):
 
 @app.route("/products/", methods=["GET"])
 def products_index():
-    return render_template("product/list.html", products=Product.query.all())
+    last = int((Product.query.count()-1)/5)+1
+    last = last if last > 0 else 1
+    page = request.args.get('page', default = 1, type = int)
+    page = page if page >= 1 else 1
+    page = page if page <= last else last
+    products = Product.query.paginate(page=page, per_page=5, error_out=False).items
+    return render_template("product/list.html", products=products, page=page, last=last)
 
 
 @app.route("/products/<int:number>/", methods=["GET"])

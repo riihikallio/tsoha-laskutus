@@ -27,9 +27,19 @@
       </td>
     </tr>
     {% endfor %}
+    <tr>
+      <td>
+        <a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('invoice_form') }}">
+          Add
+        </a>
+      </td>
+      <td></td>
+      <td></td>
+      <td>
+        {{ pagination("invoices_index", page, last) }}
+      </td>
+    </tr>
   </tbody>
 </table>
-<a class="btn btn-outline-primary my-3" role="button" href="{{ url_for('invoice_form') }}">
-  Add
-</a>
+
 {% endblock %}

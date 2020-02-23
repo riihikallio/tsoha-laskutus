@@ -32,7 +32,12 @@ def check_access(num):
 @app.route("/invoices/", methods=["GET"])
 @login_required
 def invoices_index():
-    return render_template("invoice/list.html", invoices=current_user.invoices)
+    last = int((len(current_user.invoices)-1)/5)+1
+    last = last if last > 0 else 1
+    page = request.args.get('page', default = 1, type = int)
+    page = page if page >= 1 else 1
+    page = page if page <= last else last
+    return render_template("invoice/list.html", invoices=current_user.invoices, page=page, last=last)
 
 
 @app.route("/invoices/edit/<int:number>/", methods=["GET"])
