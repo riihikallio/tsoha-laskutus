@@ -7,40 +7,42 @@ from application.row.models import Row
 from application.customer.models import Customer
 from application.product.models import Product
 
-
-@app.route("/init/", methods=["GET"])
-@login_required
-def invoices_init():
-    cust = Customer.query.first()
-    prod = Product.query.first()
-    row = Row(prod, 1)
-    inv = Invoice(cust, [row])
-    db.session().add(row)
-    db.session().add(inv)
-    db.session().commit()
-    return render_template("invoice/list.html", invoices=Invoice.query.all())
-
-
+# Apufunktio auktorisointiin
 def check_access(num):
     for inv in current_user.invoices:
         if inv.number == num:
             return True
     return False
 
-
-
+# Laskuluettelo
 @app.route("/invoices/", methods=["GET"])
 @login_required
 def invoices_index():
     last = int((len(current_user.invoices)-1)/5)+1
     last = last if last > 0 else 1
-    page = request.args.get('page', default = 1, type = int)
+    page = request.args.get('page', default=1, type=int)
     page = page if page >= 1 else 1
     page = page if page <= last else last
-    invoices = Invoice.query.filter_by(account_id=current_user.id).paginate(page=page, per_page=5, error_out=False).items
+    invoices = Invoice.query.filter_by(account_id=current_user.id).paginate(
+        page=page, per_page=5, error_out=False).items
     return render_template("invoice/list.html", invoices=invoices, page=page, last=last)
 
+# Laskun katselunäkymä
+@app.route("/invoices/<int:number>/", methods=["GET"])
+@login_required
+def invoice_show(number):
+    if not check_access(number):
+        return redirect(url_for("invoices_index"))
+    inv = Invoice.query.get(number)
+    total = 0
+    for row in inv.rows:
+        total += row.product.price*row.qty
+    if bool(inv):
+        return render_template("invoice/show.html", inv=inv, tot=total)
+    else:
+        return redirect(url_for("invoices_index"))
 
+# Laskun muokkauslomake
 @app.route("/invoices/edit/<int:number>/", methods=["GET"])
 @login_required
 def invoice_edit(number):
@@ -58,22 +60,7 @@ def invoice_edit(number):
     else:
         return redirect(url_for("invoices_index"))
 
-
-@app.route("/invoices/<int:number>/", methods=["GET"])
-@login_required
-def invoice_show(number):
-    if not check_access(number):
-        return redirect(url_for("invoices_index"))
-    inv = Invoice.query.get(number)
-    total = 0
-    for row in inv.rows:
-        total += row.product.price*row.qty
-    if bool(inv):
-        return render_template("invoice/show.html", inv=inv, tot=total)
-    else:
-        return redirect(url_for("invoices_index"))
-
-
+# Muokatun laskun tallennus
 @app.route("/invoices/<int:number>/", methods=["POST"])
 @login_required
 def invoice_save(number):
@@ -102,7 +89,7 @@ def invoice_save(number):
         db.session().commit()
     return redirect(url_for("invoices_index"))
 
-
+# Uuden laskun luomislomake
 @app.route("/invoices/new/", methods=["GET"])
 @login_required
 def invoice_form():
@@ -111,7 +98,7 @@ def invoice_form():
         form.rows.append_entry()
     return render_template("invoice/edit.html", form=form, num=0)
 
-
+# Uuden laskun tallennus
 @app.route("/invoices/", methods=["POST"])
 @login_required
 def invoice_create():
@@ -134,7 +121,7 @@ def invoice_create():
         db.session().commit()
     return redirect(url_for("invoices_index"))
 
-
+# Laskun poistaminen
 @app.route("/invoices/del/<int:number>/", methods=["GET"])
 @login_required
 def invoice_delete(number):

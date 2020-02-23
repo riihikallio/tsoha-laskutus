@@ -5,11 +5,11 @@ from application.product.models import Product
 from application.product.forms import ProductForm
 from application.row.models import Row
 
-
+# Onko tuote käytössä jollain laskulla?
 def deletable(number):
     return Row.query.filter_by(product_num=number).count() == 0
 
-
+# Tuoteluettelo
 @app.route("/products/", methods=["GET"])
 def products_index():
     last = int((Product.query.count()-1)/5)+1
@@ -20,7 +20,7 @@ def products_index():
     products = Product.query.paginate(page=page, per_page=5, error_out=False).items
     return render_template("product/list.html", products=products, page=page, last=last)
 
-
+# Muokkauslomake
 @app.route("/products/<int:number>/", methods=["GET"])
 @login_required
 def product_edit(number):
@@ -35,7 +35,7 @@ def product_edit(number):
     else:
         return redirect(url_for("products_index"))
 
-
+# Muokatun tuotteen tallennus
 @app.route("/products/<int:number>/", methods=["POST"])
 @login_required
 def product_save(number):
@@ -51,13 +51,13 @@ def product_save(number):
         db.session().commit()
     return redirect(url_for("products_index"))
 
-
+# Uuden tuotteen luomislomake
 @app.route("/products/new/", methods=["GET"])
 @login_required
 def product_form():
     return render_template("product/edit.html", form=ProductForm(), num=0, delete=False)
 
-
+# Uuden tuotteen tallennus
 @app.route("/products/", methods=["POST"])
 @login_required
 def product_create():
@@ -70,7 +70,7 @@ def product_create():
         db.session().commit()
     return redirect(url_for("products_index"))
 
-
+# Tuotteen poistaminen
 @app.route("/products/del/<int:number>/", methods=["GET"])
 @login_required
 def product_delete(number):

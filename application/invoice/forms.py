@@ -10,9 +10,10 @@ from application.row.forms import RowForm
 def get_customers():
     return Customer.query
 
+
 class InvoiceForm(FlaskForm):
-    customer = QuerySelectField('Customer',[validators.InputRequired(u'Please select a customer')], 
-                query_factory=get_customers, get_label='name', allow_blank=True)
+    customer = QuerySelectField('Customer', [validators.InputRequired(u'Please select a customer')],
+                                query_factory=get_customers, get_label='name', allow_blank=True)
     rows = ModelFieldList(FormField(RowForm))
 
     class Meta:
