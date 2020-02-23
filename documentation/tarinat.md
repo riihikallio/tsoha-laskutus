@@ -3,6 +3,7 @@
 Roolissa | Haluan | Jotta | Toteutettu
 --- | --- | --- | ---
 Käyttäjä | Nähdä asiakkaat  | | X
+Kukkuu
 Käyttäjä | Lisätä asiakkaan  | | X
 Käyttäjä | Muokata asiakasta  | | X
 Käyttäjä | Poistaa asiakkaan  | | X
