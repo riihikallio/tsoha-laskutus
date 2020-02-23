@@ -107,11 +107,8 @@ def invoice_save(number):
 @login_required
 def invoice_form():
     form = InvoiceForm()
-    form.rows.append_entry()
-    form.rows.append_entry()
-    form.rows.append_entry()
-    form.rows.append_entry()
-    form.rows.append_entry()
+    for i in range(5):
+        form.rows.append_entry()
     return render_template("invoice/edit.html", form=form, num=0)
 
 
