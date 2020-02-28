@@ -171,6 +171,7 @@ WHERE customer.number = ?
 ```sql
 INSERT INTO invoice (date_created, date_modified, customer_num, account_id)
     VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?)
+
 INSERT INTO row (date_created, date_modified, product_num, qty, invoice_num)
     VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?)
 ```
