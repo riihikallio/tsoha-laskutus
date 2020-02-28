@@ -11,8 +11,7 @@ def get_products():
 
 
 class RowForm(FlaskForm, ModelForm):
-    product = QuerySelectField(
-        'Product', query_factory=get_products, get_label='name', allow_blank=True)
+    product = QuerySelectField('Product', query_factory=get_products, get_label='name', allow_blank=True)
     qty = StringField("Qty")
 
     class Meta:

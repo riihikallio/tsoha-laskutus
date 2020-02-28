@@ -6,8 +6,6 @@ from application.customer.forms import CustomerForm
 from application.invoice.models import Invoice
 
 # Onko asiakkaalla laskuja?
-
-
 def deletable(number):
     return Invoice.query.filter_by(customer_num=number).count() == 0
 
