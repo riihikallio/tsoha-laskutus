@@ -200,7 +200,7 @@ DELETE FROM invoice WHERE invoice.number = ?
 
 ### Rajoittaa käyttäjät omiin laskuihinsa
 
-Tämä tapahtuu ohjelmallisesti. Aina laskuja käsiteltäessa tarkistetaan, onko käyttäjä laskun luoja.
+Tämä tapahtuu ohjelmallisesti. Aina laskuja käsiteltäessa tarkistetaan, onko käyttäjä laskun luoja. Lisäksi monissa laskuja käsittelevissä kyselyissä on myös ehto `WHERE ? = invoice.account_id`
 
 ### Nähdä laskun rivit
 
