@@ -2,7 +2,7 @@
 
 Tietokanta on täysin normalisoitu, mikä ei todellisuudessa oikein sovi laskutukseen. Nyt, jos asiakkaan tai tuotteen tietoja muokataan, niin muutokset vaikuttavat myös vanhoihin laskuihin: esimerkiksi hinta muuttuu. Oikeasti laskulle pitäisi kopioida senhetkiset tiedot asiakkaasta ja tuotteesta eli denormalisoida. Nykyisessä ratkaisussa  viite-eheyden varmistamiseksi asiakasta tai tuotetta ei voi poistaa, jos se esiintyy jollain laskulla. Denormalisoinnin yhteydessä voisi laskea rivisumman (product.price*row.qty) ja tallentaa sen riville valmiiksi. Laskun loppusumman tallentamista voisi harkita.
 
-Todelliseen laskutussovellukseen tarvittaisiin lisää kenttiä: viitenumeroita, yhteyshenkilöitä, maksuehto, eräpäivä jne. Niiden toteuttaminen on kuitenkin suoraviivaista tämän rakenteen päälle.
+Todelliseen laskutussovellukseen tarvittaisiin lisää kenttiä: viitenumerot, yhteyshenkilöt, maksuehto, eräpäivä jne. Niiden toteuttaminen on kuitenkin suoraviivaista tämän rakenteen päälle. Samoin tuoteryhmän pitäisi olla oma taulunsa, johon viitataan avaimella.
 
 Indeksejä on aika paljon. Pääavaimet indeksoidaan automaattisesti, mutta myös kaikki muut viiteavaimet on indeksoitu. Lisäksi on indeksoitu käyttäjien nimet ja salasanat sisäänkirjautumista varten. Tuoteryhmät ja asiakkaiden nimet on indeksoitu raportointia varten. Jos raportteja ajetaan harvoin, niin niiden indeksoinnin mielekkyyden voi kyseenalaistaa.
 
