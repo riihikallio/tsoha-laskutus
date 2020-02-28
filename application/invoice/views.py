@@ -49,13 +49,14 @@ def invoice_edit(number):
     if not check_access(number):
         return redirect(url_for("invoices_index"))
     inv = Invoice.query.get(number)
-    form = InvoiceForm()
-    form.customer.data = inv.customer
-    for row in inv.rows:
-        form.rows.append_entry({"product": row.product, "qty": row.qty})
-    form.rows.append_entry()
-    form.rows.append_entry()
     if bool(inv):
+        form = InvoiceForm()
+        form.customer.data = inv.customer
+        # Lisätään laskulle rivit ja kaksi tyhjää
+        for row in inv.rows:
+            form.rows.append_entry({"product": row.product, "qty": row.qty})
+        form.rows.append_entry()
+        form.rows.append_entry()
         return render_template("invoice/edit.html", form=form, num=inv.number)
     else:
         return redirect(url_for("invoices_index"))
@@ -69,13 +70,14 @@ def invoice_save(number):
     form = InvoiceForm(request.form)
     if not form.validate():
         return render_template("invoice/edit.html", form=form, num=number)
+    # Lisätään laskun rivit, jos rivillä on määrä ja tuote kunnossa
     rows = []
     for formRow in form.rows.data:
         try:
             qty = float(formRow["qty"])
         except ValueError:
             continue
-        if formRow["product"] and qty > 0:
+        if formRow["product"] and qty > 0 and qty < 10000:
             rows.append(Row(formRow["product"], qty))
     inv = Invoice(form.customer.data, rows)
     inv.number = number
@@ -94,6 +96,7 @@ def invoice_save(number):
 @login_required
 def invoice_form():
     form = InvoiceForm()
+    # Lisätään viisi laskuriviä
     for i in range(5):
         form.rows.append_entry()
     return render_template("invoice/edit.html", form=form, num=0)
@@ -105,13 +108,14 @@ def invoice_create():
     form = InvoiceForm(request.form)
     if not form.validate():
         return render_template("invoice/edit.html", form=form, num=0)
+    # Lisätään laskun rivit, jos rivillä on määrä ja tuote kunnossa
     rows = []
     for formRow in form.rows.data:
         try:
             qty = float(formRow["qty"])
         except ValueError:
             continue
-        if formRow["product"] and qty >= 0:
+        if formRow["product"] and qty >= 0 and qty < 10000:
             rows.append(Row(formRow["product"], qty))
     inv = Invoice(form.customer.data, rows)
     if bool(inv) and bool(inv.customer) and bool(inv.customer.name) and len(inv.rows) > 0:
